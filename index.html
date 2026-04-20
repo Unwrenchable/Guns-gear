@@ -279,7 +279,7 @@
       <section id="connect" class="section-card" aria-label="Contact Long Range Precision">
         <h2>Contact Long Range Precision</h2>
         <p>Contact details are protected and only revealed in-browser to reduce scraping and spam.</p>
-        <button id="reveal-contact" type="button">Reveal contact details</button>
+        <button id="reveal-contact" class="button-link" type="button">Reveal contact details</button>
         <div class="contact-grid">
           <div class="contact-item">
             <span class="contact-label">Phone</span>
@@ -309,7 +309,7 @@
           </label>
           <label class="assistive-hidden">
             Leave this field blank
-            <input id="company-name" type="text" tabindex="-1" autocomplete="off" />
+            <input id="alt-phone" type="text" tabindex="-1" autocomplete="off" />
           </label>
           <button type="submit">Send secure inquiry</button>
           <p id="contact-status" class="form-status" aria-live="polite"></p>
@@ -335,6 +335,7 @@
       const contactForm = document.getElementById('contact-form');
       const contactStatus = document.getElementById('contact-status');
       const pageLoadedAt = Date.now();
+      const MIN_DWELL_TIME_MS = 1200;
       const readSearchFromUrl = () => new URLSearchParams(window.location.search).get('q') || '';
       const writeSearchToUrl = (query) => {
         const url = new URL(window.location.href);
@@ -397,9 +398,9 @@
       contactForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const honeypot = document.getElementById('company-name').value.trim();
+        const honeypot = document.getElementById('alt-phone').value.trim();
         const dwellTime = Date.now() - pageLoadedAt;
-        if (honeypot || dwellTime < 1200) {
+        if (honeypot || dwellTime < MIN_DWELL_TIME_MS) {
           contactStatus.textContent = 'Blocked suspicious submission. Please try again.';
           return;
         }
@@ -411,8 +412,8 @@
         const message = document.getElementById('contact-message').value.trim();
         const subject = encodeURIComponent(`Build inquiry from ${name}`);
         const body = encodeURIComponent(`Name: ${name}\nReply email: ${reply}\n\nMessage:\n${message}`);
-        window.location.href = `${emailAnchor.href}?subject=${subject}&body=${body}`;
         contactStatus.textContent = 'Opening your default mail app with a protected pre-filled draft.';
+        window.location.href = `${emailAnchor.href}?subject=${subject}&body=${body}`;
       });
     </script>
   </body>
