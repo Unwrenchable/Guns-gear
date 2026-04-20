@@ -28,7 +28,7 @@ Long-tail opportunities — include naturally in copy and metadata:
 ## How to Audit the Current Page
 
 ```
-# Check title length (50–60 chars ideal)
+# Check title length (50-60 chars ideal)
 grep -o '<title>[^<]*</title>' index.html
 
 # Find missing alt attributes on images
@@ -63,8 +63,8 @@ node -e "const s=require('fs').readFileSync('index.html','utf8'); const m=s.matc
 ## Content Quality Checklist
 
 Before marking any content task done:
-- [ ] `<title>` is 50–60 characters and contains primary keyword
-- [ ] `<meta name="description">` is 140–160 characters with a CTA
+- [ ] `<title>` is 50-60 characters and contains primary keyword
+- [ ] `<meta name="description">` is 140-160 characters with a CTA
 - [ ] `<h1>` appears exactly once per page
 - [ ] Every product has a `data-keywords` attribute with caliber, use-case, and category
 - [ ] JSON-LD parses without errors (`node -e "JSON.parse(...)"`)
