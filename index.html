@@ -38,7 +38,7 @@
             "@type": "Organization",
             "name": "Long Range Precision",
             "url": "https://www.lrplongrangeprecision.com/",
-            "logo": "https://cdn.filestackcontent.com/CUJNGfAmR6SiRYQz7Jc3",
+            "logo": "https://cdn.filestackcontent.com/TbqmstOET1qI8RX7TtE3",
             "sameAs": [
               "https://www.facebook.com/lrplongrangeprecision",
               "https://www.instagram.com/lrplongrangeprecision",
@@ -88,7 +88,7 @@
             "description": "Competition-focused bolt-action precision rifle platform.",
             "brand": { "@type": "Brand", "name": "Long Range Precision" },
             "category": "Rifle",
-            "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": "3699", "url": "https://www.lrplongrangeprecision.com/" }
+            "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": "3699", "url": "https://www.lrplongrangeprecision.com/#rifles" }
           },
           {
             "@type": "Product",
@@ -96,7 +96,7 @@
             "description": "First focal plane optic with precision turrets for long-range work.",
             "brand": { "@type": "Brand", "name": "Long Range Precision" },
             "category": "Optic",
-            "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": "1499", "url": "https://www.lrplongrangeprecision.com/" }
+            "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": "1499", "url": "https://www.lrplongrangeprecision.com/#optics" }
           },
           {
             "@type": "Product",
@@ -104,7 +104,7 @@
             "description": "Hybrid muzzle brake and suppressor-ready interface.",
             "brand": { "@type": "Brand", "name": "Long Range Precision" },
             "category": "Accessory",
-            "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": "249", "url": "https://www.lrplongrangeprecision.com/" }
+            "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": "249", "url": "https://www.lrplongrangeprecision.com/#accessories" }
           },
           {
             "@type": "FAQPage",
@@ -413,6 +413,11 @@
       .notice {
         color: var(--muted);
         font-size: 0.9rem;
+      }
+
+      .age-exit {
+        max-width: 700px;
+        margin: 3rem auto;
       }
 
       .contact-grid {
@@ -839,9 +844,21 @@
         <h2>Legal &amp; policies</h2>
         <p class="notice">All sales and transfers are subject to federal, state, and local law. Buyer is responsible for compliance in their jurisdiction.</p>
         <div class="legal-links">
-          <a class="button-link" href="#">Privacy Policy</a>
-          <a class="button-link" href="#">Terms &amp; Store Policies</a>
-          <a class="button-link" href="#">Shipping &amp; FFL Policy</a>
+          <a class="button-link" href="#privacy-policy">Privacy Policy</a>
+          <a class="button-link" href="#terms-policy">Terms &amp; Store Policies</a>
+          <a class="button-link" href="#shipping-policy">Shipping &amp; FFL Policy</a>
+        </div>
+        <div id="privacy-policy" class="section-card">
+          <h3>Privacy Policy</h3>
+          <p class="notice">We collect only the information required to respond to your inquiry and fulfill lawful business operations.</p>
+        </div>
+        <div id="terms-policy" class="section-card">
+          <h3>Terms &amp; Store Policies</h3>
+          <p class="notice">Use of this site and any transaction is subject to applicable law and all posted store policies.</p>
+        </div>
+        <div id="shipping-policy" class="section-card">
+          <h3>Shipping &amp; FFL Policy</h3>
+          <p class="notice">Firearm-related shipments, where applicable, must be processed through legal channels including FFL transfer requirements.</p>
         </div>
       </section>
     </main>
@@ -1026,7 +1043,13 @@
       });
 
       ageNo.addEventListener('click', () => {
-        window.location.href = 'https://www.google.com';
+        document.body.innerHTML = `
+          <main class="container section-card age-exit" role="main">
+            <h1>Age-restricted content</h1>
+            <p>This site is intended for visitors 18 years of age or older.</p>
+            <p>Please exit this page and view age-appropriate firearm safety resources with a parent or guardian if needed.</p>
+          </main>
+        `;
       });
 
       contactForm.addEventListener('submit', (event) => {
