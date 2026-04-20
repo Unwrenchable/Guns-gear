@@ -808,11 +808,11 @@
         <div class="contact-grid">
           <div class="contact-item">
             <span class="contact-label">Phone</span>
-            <span id="contact-phone" class="contact-value">Tap reveal to view</span>
+            <span id="contact-phone" class="contact-value">Select reveal to view</span>
           </div>
           <div class="contact-item">
             <span class="contact-label">Email</span>
-            <span id="contact-email" class="contact-value">Tap reveal to view</span>
+            <span id="contact-email" class="contact-value">Select reveal to view</span>
           </div>
           <div class="contact-item">
             <span class="contact-label">Visit</span>
@@ -861,6 +861,12 @@
           <p class="notice">Firearm-related shipments, where applicable, must be processed through legal channels including FFL transfer requirements.</p>
         </div>
       </section>
+
+      <section id="age-exit-message" class="section-card age-exit hidden" aria-label="Age restricted notice" tabindex="-1">
+        <h2>Age-restricted content</h2>
+        <p class="notice">This site is intended for visitors 18 years of age or older.</p>
+        <p class="notice">Please exit this page and view age-appropriate firearm safety resources with a parent or guardian if needed.</p>
+      </section>
     </main>
 
     <footer class="container">
@@ -882,6 +888,7 @@
       const ageGate = document.getElementById('age-gate');
       const ageYes = document.getElementById('age-yes');
       const ageNo = document.getElementById('age-no');
+      const ageExitMessage = document.getElementById('age-exit-message');
 
       let pendingFilterFrame;
       let pendingUrlWrite;
@@ -991,8 +998,17 @@
         const phone = decode(contactData.phone);
         const email = `${decode(contactData.emailUser)}@${decode(contactData.emailDomain)}`;
 
-        phoneValue.innerHTML = `<a href="tel:${phone}" rel="nofollow">${phone}</a>`;
-        emailValue.innerHTML = `<a href="mailto:${email}" rel="nofollow">${email}</a>`;
+        const phoneLink = document.createElement('a');
+        phoneLink.href = `tel:${phone}`;
+        phoneLink.rel = 'nofollow';
+        phoneLink.textContent = phone;
+        phoneValue.replaceChildren(phoneLink);
+
+        const emailLink = document.createElement('a');
+        emailLink.href = `mailto:${email}`;
+        emailLink.rel = 'nofollow';
+        emailLink.textContent = email;
+        emailValue.replaceChildren(emailLink);
 
         revealContactButton.disabled = true;
         revealContactButton.textContent = 'Contact details revealed';
@@ -1043,13 +1059,12 @@
       });
 
       ageNo.addEventListener('click', () => {
-        document.body.innerHTML = `
-          <main class="container section-card age-exit" role="main">
-            <h1>Age-restricted content</h1>
-            <p>This site is intended for visitors 18 years of age or older.</p>
-            <p>Please exit this page and view age-appropriate firearm safety resources with a parent or guardian if needed.</p>
-          </main>
-        `;
+        hideAgeGate();
+        document.querySelector('header').classList.add('hidden');
+        document.querySelector('footer').classList.add('hidden');
+        document.querySelectorAll('main > section:not(#age-exit-message)').forEach((section) => section.classList.add('hidden'));
+        ageExitMessage.classList.remove('hidden');
+        ageExitMessage.focus();
       });
 
       contactForm.addEventListener('submit', (event) => {
@@ -1075,13 +1090,8 @@
         const emailLink = emailValue.querySelector('a');
         if (emailLink) {
           window.location.href = `${emailLink.href}?subject=${subject}&body=${body}`;
-        }
-      });
-
-      window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && ageGate.classList.contains('is-open')) {
-          event.preventDefault();
-          ageNo.focus();
+        } else {
+          contactStatus.textContent = 'Please reveal contact details before sending your inquiry.';
         }
       });
     </script>
