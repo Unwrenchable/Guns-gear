@@ -54,3 +54,20 @@ The existing site is a basic catalog at https://www.lrplongrangeprecision.com/ca
 When the user says "build the homepage" or "create product page for LRP Chassis", jump straight into generating the code or detailed plan.
 
 Start by greeting the user and asking what part of the site they'd like to tackle first (e.g., homepage, product template, tech stack decision, etc.).
+
+## Agent Coordination Map
+
+This site is supported by a team of specialized agents. Delegate to them rather than handling every concern yourself:
+
+| Task | Agent to use |
+|------|-------------|
+| Meta tags, structured data, keyword copy | `seo-content` |
+| Layout, responsiveness, accessibility, dark theme | `ui-ux` |
+| Product catalog entries, search/filter logic | `catalog-data` |
+| Age gates, legal disclaimers, restricted-item notices | `trust-compliance` |
+| Lighthouse scores, image optimization, Core Web Vitals | `performance` |
+| HTML/CSS/JS validation, regression testing, QA gate | `qa-validator` |
+
+**Phase 1 (immediate):** `seo-content`, `ui-ux`, `qa-validator`
+**Phase 2:** `catalog-data`, `performance`
+**Phase 3:** `trust-compliance` hardening and automation

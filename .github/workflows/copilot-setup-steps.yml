@@ -1,0 +1,34 @@
+name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install HTML/CSS/JS validation tools
+        run: |
+          npm install -g html-validate@9 stylelint@16 eslint@9
+
+      - name: Install accessibility audit tool
+        run: npm install -g @axe-core/cli@4
+
+      - name: Install Lighthouse CLI for performance audits
+        run: npm install -g lighthouse@12
+
+      - name: Install link checker
+        run: npm install -g broken-link-checker@0.7
