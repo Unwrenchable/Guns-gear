@@ -489,7 +489,7 @@
       .age-gate {
         position: fixed;
         inset: 0;
-        display: none;
+        display: flex;
         align-items: center;
         justify-content: center;
         padding: 1rem;
@@ -497,8 +497,8 @@
         z-index: 1000;
       }
 
-      .age-gate.is-open {
-        display: flex;
+      .age-gate[hidden] {
+        display: none;
       }
 
       .age-dialog {
@@ -835,7 +835,7 @@
             <input id="alt-phone" type="text" tabindex="-1" autocomplete="off">
           </div>
 
-          <button type="submit">Send secure inquiry</button>
+          <button id="contact-submit" type="submit" disabled>Send secure inquiry</button>
           <p id="contact-status" class="form-status" aria-live="polite" aria-atomic="true"></p>
         </form>
       </section>
@@ -862,7 +862,7 @@
         </div>
       </section>
 
-      <section id="age-exit-message" class="section-card age-exit hidden" aria-label="Age restricted notice" tabindex="-1">
+      <section id="age-exit-message" class="section-card age-exit hidden" aria-label="Age restricted notice" tabindex="-1" aria-live="assertive">
         <h2>Age-restricted content</h2>
         <p class="notice">This site is intended for visitors 18 years of age or older.</p>
         <p class="notice">Please exit this page and view age-appropriate firearm safety resources with a parent or guardian if needed.</p>
@@ -879,6 +879,7 @@
       const cards = [...document.querySelectorAll('article[data-product-id]')];
       const resultsCount = document.getElementById('results-count');
       const revealContactButton = document.getElementById('reveal-contact');
+      const contactSubmitButton = document.getElementById('contact-submit');
       const phoneValue = document.getElementById('contact-phone');
       const emailValue = document.getElementById('contact-email');
       const contactForm = document.getElementById('contact-form');
@@ -895,6 +896,7 @@
 
       const SEARCH_PARAM = 'q';
       const CATEGORY_PARAM = 'category';
+      const validCategories = [...categoryFilter.options].map((option) => option.value);
 
       const decode = (codes) => String.fromCharCode(...codes);
 
@@ -1012,16 +1014,15 @@
 
         revealContactButton.disabled = true;
         revealContactButton.textContent = 'Contact details revealed';
+        contactSubmitButton.disabled = false;
       };
 
       const showAgeGate = () => {
         ageGate.hidden = false;
-        ageGate.classList.add('is-open');
         ageYes.focus();
       };
 
       const hideAgeGate = () => {
-        ageGate.classList.remove('is-open');
         ageGate.hidden = true;
       };
 
@@ -1034,7 +1035,7 @@
 
       const initialState = readStateFromUrl();
       searchInput.value = initialState.query;
-      categoryFilter.value = ['Rifle', 'Optic', 'Accessory', 'Gear', 'Ammo', 'Magazine'].includes(initialState.category)
+      categoryFilter.value = validCategories.includes(initialState.category)
         ? initialState.category
         : 'all';
       document.getElementById('year').textContent = new Date().getFullYear();
