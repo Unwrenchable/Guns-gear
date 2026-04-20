@@ -38,7 +38,12 @@
             "@type": "Organization",
             "name": "Long Range Precision",
             "url": "https://www.lrplongrangeprecision.com/",
-            "description": "Top-tier gun maker focused on precision rifles and tactical gear."
+            "description": "Top-tier gun maker focused on precision rifles and tactical gear.",
+            "sameAs": [
+              "https://www.facebook.com/lrplongrangeprecision",
+              "https://www.instagram.com/lrplongrangeprecision",
+              "https://www.youtube.com/@lrplongrangeprecision"
+            ]
           },
           {
             "@type": "WebSite",
@@ -97,6 +102,13 @@
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         gap: 1rem;
       }
+      .section-card {
+        margin-top: 1.2rem;
+        background: var(--panel);
+        border: 1px solid #273250;
+        border-radius: 10px;
+        padding: 1rem;
+      }
       article {
         background: linear-gradient(180deg, #17213b, #101727);
         border: 1px solid #2f3f66;
@@ -104,6 +116,79 @@
         padding: 1rem;
       }
       h2 { margin-top: 0; font-size: 1.1rem; }
+      .button-link {
+        display: inline-block;
+        margin-top: 0.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.55rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid #4a629a;
+        color: var(--text);
+        text-decoration: none;
+        background: #1a2745;
+      }
+      .button-link:hover,
+      .button-link:focus-visible {
+        border-color: var(--accent);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+      .contact-item {
+        background: var(--panel-2);
+        border: 1px solid #35466f;
+        border-radius: 10px;
+        padding: 0.9rem;
+      }
+      .contact-label {
+        display: block;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .contact-value {
+        display: block;
+        font-weight: 600;
+        margin-top: 0.2rem;
+      }
+      .contact-form {
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.7rem;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #35466f;
+        background: var(--panel-2);
+        color: var(--text);
+        padding: 0.7rem;
+        font: inherit;
+      }
+      .contact-form button {
+        width: fit-content;
+        border-radius: 8px;
+        border: 1px solid #4a629a;
+        background: #1a2745;
+        color: var(--text);
+        padding: 0.6rem 0.9rem;
+        cursor: pointer;
+      }
+      .assistive-hidden {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .form-status {
+        margin: 0.2rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
       .chip {
         display: inline-block;
         margin-right: 0.4rem;
@@ -124,8 +209,18 @@
       <p class="tagline">
         Top-tier rifles, optics, and tactical equipment built for elite-level accuracy.
       </p>
+      <a href="#connect" class="button-link">Talk to a builder</a>
+      <a href="#socials" class="button-link">Follow on social</a>
     </header>
     <main>
+      <section class="section-card" aria-label="Why shooters choose Long Range Precision">
+        <h2>Built for serious shooters</h2>
+        <p>
+          Long Range Precision combines proven gunsmithing, premium parts, and field-tested setups to deliver reliable
+          performance for competition, hunting, and tactical applications.
+        </p>
+      </section>
+
       <section class="search-wrap" aria-label="Keyword product search">
         <label for="keyword-search">Find gear by keyword</label>
         <input
@@ -172,15 +267,75 @@
           </article>
         </div>
       </section>
+
+      <section id="socials" class="section-card" aria-label="Social channels">
+        <h2>Social channels</h2>
+        <p>Stay up to date on product drops, range content, and build highlights.</p>
+        <a class="button-link" href="https://www.facebook.com/lrplongrangeprecision" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="button-link" href="https://www.instagram.com/lrplongrangeprecision" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="button-link" href="https://www.youtube.com/@lrplongrangeprecision" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </section>
+
+      <section id="connect" class="section-card" aria-label="Contact Long Range Precision">
+        <h2>Contact Long Range Precision</h2>
+        <p>Contact details are protected and only revealed in-browser to reduce scraping and spam.</p>
+        <button id="reveal-contact" class="button-link" type="button">Reveal contact details</button>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <span class="contact-label">Phone</span>
+            <a id="contact-phone" class="contact-value" href="#" rel="nofollow">Tap to reveal</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Email</span>
+            <a id="contact-email" class="contact-value" href="#" rel="nofollow">Tap to reveal</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Visit</span>
+            <a class="contact-value" href="https://maps.google.com?q=621+Lomprey+Ct+Henderson+NV+89002" target="_blank" rel="noopener noreferrer">621 Lomprey Ct, Henderson, NV 89002</a>
+          </div>
+        </div>
+        <form id="contact-form" class="contact-form" aria-label="Protected contact form">
+          <label>
+            Name
+            <input id="contact-name" type="text" maxlength="80" required />
+          </label>
+          <label>
+            Email
+            <input id="contact-reply-email" type="email" maxlength="120" required />
+          </label>
+          <label>
+            Message
+            <textarea id="contact-message" rows="4" maxlength="800" required></textarea>
+          </label>
+          <label class="assistive-hidden">
+            Leave this field blank
+            <input id="alt-phone" type="text" tabindex="-1" autocomplete="off" />
+          </label>
+          <button type="submit">Send secure inquiry</button>
+          <p id="contact-status" class="form-status" aria-live="polite"></p>
+        </form>
+      </section>
     </main>
     <footer>
       © <span id="year"></span> Long Range Precision · Engineered to perform when it matters most.
+      <div>
+        <a class="button-link" href="#connect">Contact</a>
+        <a class="button-link" href="https://www.facebook.com/lrplongrangeprecision" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="button-link" href="https://www.instagram.com/lrplongrangeprecision" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
     </footer>
 
     <script>
       const searchInput = document.getElementById('keyword-search');
       const cards = [...document.querySelectorAll('#catalog article')];
       const resultsCount = document.getElementById('results-count');
+      const revealContactButton = document.getElementById('reveal-contact');
+      const phoneAnchor = document.getElementById('contact-phone');
+      const emailAnchor = document.getElementById('contact-email');
+      const contactForm = document.getElementById('contact-form');
+      const contactStatus = document.getElementById('contact-status');
+      const pageLoadedAt = Date.now();
+      const MIN_DWELL_TIME_MS = 1200;
       const readSearchFromUrl = () => new URLSearchParams(window.location.search).get('q') || '';
       const writeSearchToUrl = (query) => {
         const url = new URL(window.location.href);
@@ -208,9 +363,57 @@
       filterCatalog(initialSearch);
       document.getElementById('year').textContent = new Date().getFullYear();
 
+      const decode = (codes) => String.fromCharCode(...codes);
+      const contactData = {
+        phone: [55, 48, 50, 45, 50, 55, 57, 45, 52, 53, 52, 50],
+        emailUser: [74, 101, 114, 101, 109, 121],
+        emailDomain: [
+          108, 114, 112, 108, 111, 110, 103, 114, 97, 110, 103, 101, 112, 114, 101, 99, 105, 115, 105, 111, 110, 46,
+          99, 111, 109
+        ]
+      };
+      const revealContactDetails = () => {
+        const phone = decode(contactData.phone);
+        const email = `${decode(contactData.emailUser)}@${decode(contactData.emailDomain)}`;
+
+        phoneAnchor.textContent = phone;
+        phoneAnchor.href = `tel:${phone}`;
+        phoneAnchor.rel = '';
+
+        emailAnchor.textContent = email;
+        emailAnchor.href = `mailto:${email}`;
+        emailAnchor.rel = '';
+
+        revealContactButton.disabled = true;
+        revealContactButton.textContent = 'Contact details revealed';
+      };
+
       searchInput.addEventListener('input', () => {
         filterCatalog(searchInput.value);
         writeSearchToUrl(searchInput.value);
+      });
+
+      revealContactButton.addEventListener('click', revealContactDetails);
+
+      contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const honeypot = document.getElementById('alt-phone').value.trim();
+        const dwellTime = Date.now() - pageLoadedAt;
+        if (honeypot || dwellTime < MIN_DWELL_TIME_MS) {
+          contactStatus.textContent = 'Blocked suspicious submission. Please try again.';
+          return;
+        }
+
+        revealContactDetails();
+
+        const name = document.getElementById('contact-name').value.trim();
+        const reply = document.getElementById('contact-reply-email').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+        const subject = encodeURIComponent(`Build inquiry from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nReply email: ${reply}\n\nMessage:\n${message}`);
+        contactStatus.textContent = 'Opening your default mail app with a protected pre-filled draft.';
+        window.location.href = `${emailAnchor.href}?subject=${subject}&body=${body}`;
       });
     </script>
   </body>
