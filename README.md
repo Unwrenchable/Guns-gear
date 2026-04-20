@@ -13,3 +13,5 @@ Open `index.html` in a browser.
 - Structured data (`Organization`, `WebSite`, `SearchAction`)
 - Semantic page layout for discoverability
 - Built-in keyword search that filters featured guns and gear instantly
+- Dedicated social links section and quick-access social links in footer
+- Protected contact details with in-browser reveal + anti-spam contact form guardrails
