@@ -168,6 +168,11 @@
         font: inherit;
       }
 
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
       .container {
         max-width: 1000px;
         margin: 0 auto;
@@ -267,6 +272,10 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
+      }
+
+      .hero-actions {
+        margin-top: 0.7rem;
       }
 
       h1 {
@@ -378,8 +387,12 @@
 
       article p {
         margin: 0;
-        color: var(--muted);
+        color: var(--text);
         font-size: 0.95rem;
+        background: #0b1020;
+        border: 1px solid #273250;
+        border-radius: 6px;
+        padding: 0.45rem 0.5rem;
       }
 
       .chip-wrap {
@@ -479,7 +492,7 @@
         z-index: 1000;
       }
 
-      .age-gate[aria-hidden="false"] {
+      .age-gate.is-open {
         display: flex;
       }
 
@@ -530,7 +543,7 @@
     </style>
   </head>
   <body>
-    <div id="age-gate" class="age-gate" aria-hidden="true">
+    <div id="age-gate" class="age-gate" hidden>
       <div class="age-dialog" role="dialog" aria-modal="true" aria-labelledby="age-title" aria-describedby="age-copy">
         <h2 id="age-title">Age verification required</h2>
         <p id="age-copy">Some states restrict firearm marketing to users under 18. Confirm you are 18 years of age or older.</p>
@@ -579,7 +592,7 @@
               hunters, and professionals who demand repeatable results.
             </p>
             <p class="notice">FFL transfer and legal eligibility requirements apply where required by law.</p>
-            <div class="quick-links" style="margin-top: 0.7rem;">
+            <div class="quick-links hero-actions">
               <a href="#connect" class="button-link">Talk to a builder</a>
               <a href="#socials" class="button-link">View socials</a>
             </div>
@@ -812,7 +825,7 @@
           <label for="contact-message">Message</label>
           <textarea id="contact-message" class="field" rows="4" maxlength="800" required></textarea>
 
-          <div class="sr-only" aria-hidden="true">
+          <div class="sr-only">
             <label for="alt-phone">Leave this field blank</label>
             <input id="alt-phone" type="text" tabindex="-1" autocomplete="off">
           </div>
@@ -969,12 +982,14 @@
       };
 
       const showAgeGate = () => {
-        ageGate.setAttribute('aria-hidden', 'false');
+        ageGate.hidden = false;
+        ageGate.classList.add('is-open');
         ageYes.focus();
       };
 
       const hideAgeGate = () => {
-        ageGate.setAttribute('aria-hidden', 'true');
+        ageGate.classList.remove('is-open');
+        ageGate.hidden = true;
       };
 
       const initializeAgeGate = () => {
@@ -1041,7 +1056,7 @@
       });
 
       window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && ageGate.getAttribute('aria-hidden') === 'false') {
+        if (event.key === 'Escape' && ageGate.classList.contains('is-open')) {
           event.preventDefault();
           ageNo.focus();
         }
