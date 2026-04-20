@@ -291,7 +291,7 @@
           </div>
           <div class="contact-item">
             <span class="contact-label">Visit</span>
-            <a class="contact-value" href="https://maps.google.com?q=621+Lomprey+Ct++Henderson+NV+89002" target="_blank" rel="noopener noreferrer">621 Lomprey Ct, Henderson, NV 89002</a>
+            <a class="contact-value" href="https://maps.google.com?q=621+Lomprey+Ct+Henderson+NV+89002" target="_blank" rel="noopener noreferrer">621 Lomprey Ct, Henderson, NV 89002</a>
           </div>
         </div>
         <form id="contact-form" class="contact-form" aria-label="Protected contact form">
@@ -307,7 +307,7 @@
             Message
             <textarea id="contact-message" rows="4" maxlength="800" required></textarea>
           </label>
-          <label class="assistive-hidden" aria-hidden="true">
+          <label class="assistive-hidden">
             Leave this field blank
             <input id="company-name" type="text" tabindex="-1" autocomplete="off" />
           </label>
@@ -399,7 +399,7 @@
 
         const honeypot = document.getElementById('company-name').value.trim();
         const dwellTime = Date.now() - pageLoadedAt;
-        if (honeypot || dwellTime < 3000) {
+        if (honeypot || dwellTime < 1200) {
           contactStatus.textContent = 'Blocked suspicious submission. Please try again.';
           return;
         }
