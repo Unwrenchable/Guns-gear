@@ -39,6 +39,7 @@
             "name": "Long Range Precision",
             "url": "https://www.lrplongrangeprecision.com/",
             "logo": "https://cdn.filestackcontent.com/TbqmstOET1qI8RX7TtE3",
+            "description": "Long Range Precision official brand logo.",
             "sameAs": [
               "https://www.facebook.com/lrplongrangeprecision",
               "https://www.instagram.com/lrplongrangeprecision",
@@ -863,7 +864,7 @@
         </div>
       </section>
 
-      <section id="age-exit-message" class="section-card age-exit hidden" aria-label="Age restricted notice" tabindex="-1" aria-live="assertive">
+      <section id="age-exit-message" class="section-card age-exit hidden" aria-label="Age restricted notice" role="alert">
         <h2>Age-restricted content</h2>
         <p class="notice">This site is intended for visitors 18 years of age or older.</p>
         <p class="notice">Please exit this page and view age-appropriate firearm safety resources with a parent or guardian if needed.</p>
@@ -1063,10 +1064,14 @@
       ageNo.addEventListener('click', () => {
         hideAgeGate();
         document.querySelector('header').classList.add('hidden');
+        document.querySelector('header').setAttribute('aria-hidden', 'true');
         document.querySelector('footer').classList.add('hidden');
-        document.querySelectorAll('main > section:not(#age-exit-message)').forEach((section) => section.classList.add('hidden'));
+        document.querySelector('footer').setAttribute('aria-hidden', 'true');
+        document.querySelectorAll('main > section:not(#age-exit-message)').forEach((section) => {
+          section.classList.add('hidden');
+          section.setAttribute('aria-hidden', 'true');
+        });
         ageExitMessage.classList.remove('hidden');
-        ageExitMessage.focus();
       });
 
       contactForm.addEventListener('submit', (event) => {
@@ -1092,8 +1097,6 @@
         const emailLink = emailValue.querySelector('a');
         if (emailLink) {
           window.location.href = `${emailLink.href}?subject=${subject}&body=${body}`;
-        } else {
-          contactStatus.textContent = 'Please reveal contact details before sending your inquiry.';
         }
       });
     </script>
