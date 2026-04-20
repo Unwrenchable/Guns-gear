@@ -5,7 +5,7 @@ https://www.lrplongrangeprecision.com/
 
 ## Run locally
 
-Open `/home/runner/work/Guns-gear/Guns-gear/index.html` in a browser.
+Open `index.html` in a browser.
 
 ## What was added
 
